@@ -1,0 +1,17 @@
+[
+    {
+        "model": "linear_regression",
+        "MSE": 1538550878206.337,
+        "R2-Score": 0.5594227370111688
+    },
+    {
+        "model": "gradient_boosting",
+        "MSE": 1002736189895.4958,
+        "R2-Score": 0.7128578766540092
+    },
+    {
+        "model": "random_forest",
+        "MSE": 804816875869.0682,
+        "R2-Score": 0.769533772720604
+    }
+]
