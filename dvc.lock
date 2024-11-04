@@ -1,0 +1,90 @@
+schema: '2.0'
+stages:
+  preprocess:
+    cmd: python src/preprocess.py data/data.csv data/clean_data.csv data/params.yaml
+    deps:
+    - path: data/data.csv
+      hash: md5
+      md5: 801f8030dad1df22a53edfdbfa4e80f0
+      size: 29981
+    - path: data/params.yaml
+      hash: md5
+      md5: acfc4e92fc5a8d58c4787a2462a380ce
+      size: 524
+    outs:
+    - path: data/clean_data.csv
+      hash: md5
+      md5: d8f5fb805c83c46e781406fbaa1f10d5
+      size: 58343
+  train:
+    cmd: python src/train.py data/clean_data.csv models/train/ data/params.yaml
+    deps:
+    - path: data/clean_data.csv
+      hash: md5
+      md5: d8f5fb805c83c46e781406fbaa1f10d5
+      size: 58343
+    - path: data/params.yaml
+      hash: md5
+      md5: acfc4e92fc5a8d58c4787a2462a380ce
+      size: 524
+    - path: src/train.py
+      hash: md5
+      md5: e017230eabc72c15cb1baf78e93ffb00
+      size: 2450
+    outs:
+    - path: models/train/
+      hash: md5
+      md5: 0d94e4744297734df2d415293b9167a6.dir
+      size: 2701996
+      nfiles: 4
+  evaluate:
+    cmd: python src/evaluate.py data/clean_data.csv models/train/ metrics.json data/params.yaml
+      results/metrics.csv results/metrics.md
+    deps:
+    - path: data/clean_data.csv
+      hash: md5
+      md5: d8f5fb805c83c46e781406fbaa1f10d5
+      size: 58343
+    - path: data/params.yaml
+      hash: md5
+      md5: acfc4e92fc5a8d58c4787a2462a380ce
+      size: 524
+    - path: models/train/
+      hash: md5
+      md5: 0d94e4744297734df2d415293b9167a6.dir
+      size: 2701996
+      nfiles: 4
+    outs:
+    - path: results/metrics.csv
+      hash: md5
+      md5: 2327175b3107db5347e81e3e575fa30d
+      size: 180
+    - path: results/metrics.md
+      hash: md5
+      md5: 3d329a67924dd941c179a849f4d9ef8c
+      size: 244
+  optimizacion:
+    cmd: python src/optimizacion.py data/clean_data.csv models/optimizacion/ data/params.yaml
+    deps:
+    - path: data/clean_data.csv
+      hash: md5
+      md5: d8f5fb805c83c46e781406fbaa1f10d5
+      size: 58343
+    - path: data/params.yaml
+      hash: md5
+      md5: acfc4e92fc5a8d58c4787a2462a380ce
+      size: 524
+    - path: src/optimizacion.py
+      hash: md5
+      md5: 6744d031302881f3408da1e6e9e98298
+      size: 2298
+    outs:
+    - path: models/optimizacion/
+      hash: md5
+      md5: 11faa49ceb7c91c771d5d938a0aa98ef.dir
+      size: 561022
+      nfiles: 2
+    - path: results/best_hyperparameters.json
+      hash: md5
+      md5: 1cf4b8e143f7d736d0829e8f16148010
+      size: 175
