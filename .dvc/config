@@ -1,0 +1,4 @@
+[core]
+    remote = myremote
+['remote "myremote"']
+    url = ../git@github.com:DanielP53/productDevelopmentLab1.git

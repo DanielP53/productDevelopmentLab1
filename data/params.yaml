@@ -9,6 +9,13 @@ train:
     gradient_boosting:
       n_estimators: 100
       learning_rate: 0.1
+  hyperparameters:
+    random_forest:
+      n_estimators: [50, 100, 150]
+      max_depth: [5, 10, 15]
+    gradient_boosting:
+      n_estimators: [50, 100, 150]
+      learning_rate: [0.01, 0.1, 0.2]
 
 preprocessing:
   target: price

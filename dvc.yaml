@@ -1,0 +1,37 @@
+stages:
+  preprocess:
+    cmd: python src/preprocess.py data/data.csv data/clean_data.csv data/params.yaml
+    deps:
+    - data/data.csv
+    - data/params.yaml
+    outs:
+    - data/clean_data.csv
+
+  train:
+    cmd: python src/train.py data/clean_data.csv models/train/ data/params.yaml
+    deps:
+    - data/clean_data.csv
+    - data/params.yaml
+    - src/train.py
+    outs:
+    - models/train/
+
+  evaluate:
+    cmd: python src/evaluate.py data/clean_data.csv models/train/ metrics.json data/params.yaml results/metrics.csv results/metrics.md
+    deps:
+      - data/clean_data.csv
+      - models/train/
+      - data/params.yaml
+    outs:
+      - results/metrics.csv
+      - results/metrics.md
+
+  optimizacion:
+    cmd: python src/optimizacion.py data/clean_data.csv models/optimizacion/ data/params.yaml
+    deps:
+    - data/clean_data.csv
+    - data/params.yaml
+    - src/optimizacion.py
+    outs:
+    - models/optimizacion/
+    - results/best_hyperparameters.json
